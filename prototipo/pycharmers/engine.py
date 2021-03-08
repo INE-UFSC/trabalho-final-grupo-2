@@ -4,6 +4,7 @@ do pygame e a captura de teclas pressionadas.
 """
 
 
+import sys
 import pygame as pg
 
 
@@ -49,3 +50,63 @@ class DisplayManager:
                 pg.transform.scale(surface, self.__window.get_size()), (0, 0)
             )
         pg.display.update()
+
+
+class InputManager:
+    """
+    Gerencia as teclas pressionadas, com base em um dicionário de
+    mapeamento de teclas à ações passado na inicialização
+
+    O dicionário de mapeamentos passado na inicialização deve
+    seguir o seguinte formato:
+
+    mappings = {
+        pg.KEY: "ação",
+        ...
+    }
+
+    Em que pg.KEY são as constantes do pygame representando cada
+    uma das teclas do teclado.
+    """
+
+    def __init__(self, mappings: dict[int, str]):
+        self.__mappings = mappings
+        self.__pressed: set[str] = set()
+        self.__just_pressed: set[str] = set()
+
+    @property
+    def pressed(self):
+        """
+        Todas as teclas que estão pressionadas
+
+        :returns: o set de teclas pressionadas
+        """
+        return self.__pressed
+
+    @property
+    def just_pressed(self):
+        """
+        As teclas que foram pressionadas no frame
+
+        :returns: o set de teclas pressionadas no frame atual
+        """
+        return self.__just_pressed
+
+    def update(self):
+        """
+        Atualiza o estado das teclas pressionadas, com base
+        nos eventos do pygame
+        """
+        self.__just_pressed.clear()
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            elif event.type in (pg.KEYDOWN, pg.KEYUP) and event.key in self.__mappings:
+                action_name = self.__mappings[event.key]
+                if event.type == pg.KEYDOWN:
+                    self.__pressed.add(action_name)
+                    self.__just_pressed.add(action_name)
+                elif action_name in self.__pressed:
+                    self.__pressed.remove(action_name)
