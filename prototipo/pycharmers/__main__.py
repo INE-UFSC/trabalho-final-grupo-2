@@ -23,6 +23,9 @@ def main():
     ] + [
         pg.Rect(position_x, 208, 16, 16)
         for position_x in range(160, 240, 16)
+    ] + [
+        pg.Rect(position_x, 160, 16, 16)
+        for position_x in range(80, 160, 16)
     ]
     for rect in rects:
         pg.draw.rect(tile_layer, (255, 0, 0), rect)
