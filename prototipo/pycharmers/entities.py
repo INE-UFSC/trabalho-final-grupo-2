@@ -2,8 +2,8 @@
 
 
 from abc import ABC, abstractmethod
-from pycharmers.nodes import PhysicsBody
 import pygame as pg
+from pycharmers.nodes import PhysicsBody
 
 
 class Entity(ABC):

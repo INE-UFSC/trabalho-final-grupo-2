@@ -93,6 +93,7 @@ class PhysicsBody:
             self.__velocity.y = 1
             self.__shape.bottom = collider.top
         elif self.__velocity.y < 0:
+            self.__velocity.y = 0
             self.__shape.top = collider.bottom
         self.__position.y = self.__shape.y
 
