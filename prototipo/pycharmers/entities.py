@@ -36,8 +36,9 @@ class Entity(ABC):
         exemplo movimentação, de forma a obter
         framerate independence.
 
-        :param delta_time: tempo desde o último frame
-        :param colliders: retângulos que possuem colisão
+        Args:
+            delta_time (float): o tempo passado desde o último frame
+            colliders (list[pg.Rect]): lista de retângulos para colisão
         """
 
     @abstractmethod
@@ -45,6 +46,9 @@ class Entity(ABC):
         """
         Método que realiza o desenho da entidade em
         determinada posição na superfície passada.
+
+        Args:
+            surface (pg.Surface): superfície para desenhar o sprite
         """
 
 
@@ -56,4 +60,8 @@ class ControllableEntity(Entity):
         """
         Método para a atualização da entidade conforme
         o estado das teclas pressionadas.
+
+        Args:
+            pressed (list[str]): teclas pressionadas
+            just_pressed (list[str]): teclas pressionadas no frame atual
         """

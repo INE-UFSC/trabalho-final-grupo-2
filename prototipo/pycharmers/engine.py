@@ -31,7 +31,8 @@ class DisplayManager:
         """
         Atualiza o clock do jogo e retorna o delta time
 
-        :returns: o tempo passado desde o último frame
+        Returns:
+            float: o tempo passado desde o último frame
         """
         return self.__clock.tick(self.__framerate) * 0.001 * self.__framerate
 
@@ -42,7 +43,9 @@ class DisplayManager:
         Assume que todas as camadas passadas possuem tamanho
         igual ao da janela, sem levar em conta a scale.
 
-        :param layers: a lista de superfícies para desenhar na janela
+        Args:
+            layers (list[pg.Surface]): a lista de superfícies para
+            desenhar na janela
         """
         self.__window.fill((0, 0, 0))
         for surface in layers:
@@ -79,7 +82,8 @@ class InputManager:
         """
         Todas as teclas que estão pressionadas
 
-        :returns: o set de teclas pressionadas
+        Returns:
+            set[str]: set de teclas pressionadas, conforme os mapeamentos
         """
         return self.__pressed
 
@@ -88,7 +92,9 @@ class InputManager:
         """
         As teclas que foram pressionadas no frame
 
-        :returns: o set de teclas pressionadas no frame atual
+        Returns:
+            set[str]: set de teclas pressionadas no frame,
+            conforme os mapeamentos
         """
         return self.__just_pressed
 
