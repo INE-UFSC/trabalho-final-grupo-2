@@ -3,7 +3,6 @@
 
 from abc import ABC, abstractmethod
 import pygame as pg
-from pycharmers.nodes import PhysicsBody
 
 
 class Entity(ABC):
@@ -49,10 +48,6 @@ class Entity(ABC):
             surface (pg.Surface): superfície para desenhar o sprite
         """
 
-
-class ControllableEntity(Entity):
-    """ Entidade que deve receber também o estado do teclado. """
-
     @abstractmethod
     def input(self, pressed: list[str], just_pressed: list[str]):
         """
@@ -63,30 +58,3 @@ class ControllableEntity(Entity):
             pressed (list[str]): teclas pressionadas
             just_pressed (list[str]): teclas pressionadas no frame atual
         """
-
-
-class TestEntity(ControllableEntity):
-    """ Entidade de testes para colisão """
-
-    def __init__(self, shape: tuple[int, int]):
-        self.__body = PhysicsBody(shape, (0, 0))
-
-    def process(self):
-        pass
-
-    def physics(self, delta_time: float, colliders: list[pg.Rect]):
-        self.__body.apply_gravity(delta_time)
-        self.__body.move_and_collide(delta_time, colliders)
-
-    def input(self, pressed: list[str], just_pressed: list[str]):
-        self.__body.velocity.x = 0
-
-        if "left" in pressed:
-            self.__body.velocity.x = -2
-        if "right" in pressed:
-            self.__body.velocity.x = 2
-        if "space" in just_pressed and self.__body.grounded:
-            self.__body.velocity.y = -8
-
-    def draw(self, surface: pg.Surface):
-        pg.draw.rect(surface, (255, 255, 255), self.__body.shape)

@@ -14,8 +14,8 @@ class PhysicsBody:
     de uma entidade, levando em conta as colisões
     """
 
-    def __init__(self, shape: tuple[int, int], position: tuple[int, int]):
-        self.__shape = pg.Rect(*position, *shape)
+    def __init__(self, position: tuple[int, int], size: tuple[int, int]):
+        self.__shape = pg.Rect(*position, *size)
         self.__position = pg.Vector2(*position)
         self.__velocity = pg.Vector2(0)
         self.__grounded = False
