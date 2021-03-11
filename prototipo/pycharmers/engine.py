@@ -36,22 +36,17 @@ class DisplayManager:
         """
         return self.__clock.tick(self.__framerate) * 0.001 * self.__framerate
 
-    def draw(self, layers: list[pg.Surface]):
+    def draw(self, surface: pg.Surface):
         """
-        Desenha a camada de superfícies na janela.
-
-        Assume que todas as camadas passadas possuem tamanho
-        igual ao da janela, sem levar em conta a scale.
+        Desenha uma superfície na janela.
 
         Args:
-            layers (list[pg.Surface]): a lista de superfícies para
-            desenhar na janela
+            surface (pg.Surface): superfície a desenhar
         """
         self.__window.fill((0, 0, 0))
-        for surface in layers:
-            self.__window.blit(
-                pg.transform.scale(surface, self.__window.get_size()), (0, 0)
-            )
+        self.__window.blit(
+            pg.transform.scale(surface, self.__window.get_size()), (0, 0)
+        )
         pg.display.update()
 
 

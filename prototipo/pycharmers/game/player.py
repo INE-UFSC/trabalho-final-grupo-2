@@ -17,6 +17,16 @@ class PlayerEntity(Entity):
             "assets/python.png")
         )
 
+    @property
+    def shape(self):
+        """
+        Retângulo que representa a entidade no jogo
+
+        Returns:
+            Rect: retângulo
+        """
+        return self.__body.shape
+
     def process(self):
         pass
 

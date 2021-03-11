@@ -1,0 +1,11 @@
+{
+  "file_name": "assets/tileset.png",
+  "tile_size": [16, 16],
+  "tile_data": [
+    { "category": "block", "tags": ["damage"] },
+    { "category": "block", "tags": [] },
+    { "category": "background", "tags": [] },
+    { "category": "block", "tags": [] },
+    { "category": "block", "tags": [] }
+  ]
+}
