@@ -10,7 +10,7 @@ from pycharmers.settings import mappings
 def main():
     """ Função principal """
 
-    display = DisplayManager((320, 240), scale=2)
+    display = DisplayManager((320, 240), scale=3)
     inputs = InputManager(mappings)
     tileset = Tileset.from_json("assets/tileset.json")
     level = Level(Tilemap(tileset, [

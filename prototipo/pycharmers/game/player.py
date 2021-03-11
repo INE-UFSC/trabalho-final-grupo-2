@@ -3,8 +3,9 @@ Módulo relacionado ao jogador
 """
 
 
+from pycharmers.utils import image_crop, image_load
 import pygame as pg
-from pycharmers.nodes import PhysicsBody, Sprite
+from pycharmers.nodes import AnimationPlayer, PhysicsBody, Sprite
 from pycharmers.entities import Entity
 
 
@@ -13,11 +14,18 @@ class PlayerEntity(Entity):
 
     def __init__(self, position: tuple[int, int], size: tuple[int, int]):
         self.__body = PhysicsBody(position, size)
-        self.__sprite = Sprite(pg.image.load(  # type: ignore
-            "assets/python.png")
+        self.__animation_player = AnimationPlayer(
+            image_crop(image_load("assets/player_spritesheet.png"), (16, 16)),
+            {
+                "idle": [0]*16 + [1]*16,
+                "run": [2]*6 + [3]*6 + [4]*6 + [5]*6,
+                "jump": [6]*8 + [7]*8 + [8]*8
+            },
+            "idle"
         )
+        self.__sprite = Sprite()
 
-    @property
+    @ property
     def shape(self):
         """
         Retângulo que representa a entidade no jogo
@@ -28,7 +36,12 @@ class PlayerEntity(Entity):
         return self.__body.shape
 
     def process(self):
-        pass
+        self.__animation_player.play("idle")
+        if self.__body.velocity.x != 0:
+            self.__animation_player.play("run")
+        if self.__body.velocity.y < 0:
+            self.__animation_player.play("jump")
+        self.__sprite.texture = self.__animation_player.next()
 
     def physics(self, delta_time: float, colliders: list[pg.Rect]):
         self.__body.apply_gravity(delta_time)
@@ -69,7 +82,7 @@ class PlayerState:
         self.__has_item = False
         self.__finished_level = False
 
-    @property
+    @ property
     def has_item(self):
         """
         Se o jogador coletou o item
@@ -91,7 +104,7 @@ class PlayerState:
         """
         self.__has_item = False
 
-    @property
+    @ property
     def finished_level(self):
         """
         Se o jogador terminou a fase
@@ -107,7 +120,7 @@ class PlayerState:
         """
         self.__finished_level = True
 
-    @property
+    @ property
     def is_playing(self):
         """
         Se o jogador está jogando a fase
@@ -117,7 +130,7 @@ class PlayerState:
         """
         return self.__is_playing
 
-    @property
+    @ property
     def gave_up(self):
         """
         Caso o jogador não tenha desistido da fase
@@ -143,7 +156,7 @@ class Player:
         self.__entity = PlayerEntity(position, size)
         self.__state = PlayerState()
 
-    @property
+    @ property
     def entity(self):
         """
         A entidade do jogador no nível
@@ -153,7 +166,7 @@ class Player:
         """
         return self.__entity
 
-    @property
+    @ property
     def state(self):
         """
         A classe do estado do jogador
@@ -163,7 +176,7 @@ class Player:
         """
         return self.__state
 
-    @property
+    @ property
     def score(self):
         """
         Pontuação do jogador
@@ -173,7 +186,7 @@ class Player:
         """
         return self.__score
 
-    @score.setter
+    @ score.setter
     def score(self, score: int):
         """
         Define uma nova pontuação para o jogador

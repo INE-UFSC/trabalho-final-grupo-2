@@ -174,6 +174,72 @@ class Sprite:
         return self.__flip
 
 
+class AnimationPlayer:
+    """
+    Gerencia os frames de animação de uma entidade, conforme uma spritesheet
+    """
+
+    def __init__(
+        self,
+        spritesheet: list[pg.Surface],
+        animations: dict[str, list[int]],
+        starting_animation: str,
+    ):
+        self.__spritesheet = spritesheet
+        self.__animations = animations
+        self.__current_animation = starting_animation
+        self.__next_animation = starting_animation
+        self.__frame = 0
+
+    @property
+    def __current_sprite(self):
+        """
+        O sprite atual, conforme a animação e o frame
+
+        Returns:
+            pg.Surface: a textura do sprite
+        """
+        current_sprite_index = self.__animations[self.__current_animation][self.__frame]
+        return self.__spritesheet[current_sprite_index]
+
+    def __is_animation_done(self):
+        """
+        Animação já foi concluida
+
+        Returns:
+            bool: estado
+        """
+        return self.__frame >= len(self.__animations[self.__current_animation])
+
+    def play(self, animation_name: str):
+        """
+        Troca a animação atual. Só será atualizada na
+        próxima chamada à função 'next()'
+
+
+        Args:
+            animation_name (str): nova animação
+        """
+        if animation_name in self.__animations:
+            self.__next_animation = animation_name
+
+    def next(self):
+        """
+        Próximo frame de animação.
+
+        Returns:
+            pg.Surface: nova textura da animação
+        """
+        if self.__next_animation != self.__current_animation:
+            self.__current_animation = self.__next_animation
+            self.__frame = 0
+        elif self.__is_animation_done():
+            self.__frame = 0
+        sprite = self.__current_sprite
+        self.__frame += 1
+        return sprite
+
+
 class Tile:
     """ Textura e informações de uma tile """
 
