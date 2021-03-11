@@ -133,3 +133,41 @@ class PhysicsBody:
         self.__velocity.y += 0.5 * delta_time
         if self.__velocity.y > 6:
             self.__velocity.y = 6
+
+
+class Sprite:
+    """ Gerencia uma textura e o desenho dela """
+
+    def __init__(self, texture: pg.Surface = None):
+        self.__texture = texture
+        self.__flip = [False, False]
+
+    @property
+    def texture(self):
+        """
+        A textura atual do sprite
+
+        Returns:
+            pg.Surface: a superfície da textura
+        """
+        return pg.transform.flip(self.__texture, *self.__flip)
+
+    @texture.setter
+    def texture(self, texture: pg.Surface):
+        """
+        Setter para uma nova texture
+
+        Args:
+            texture (pg.Surface): a nova textura
+        """
+        self.__texture = texture
+
+    @property
+    def flip(self):
+        """
+        O estado de reflexão do sprite
+
+        Returns:
+            list[bool]: o flip horizontal e vertical
+        """
+        return self.__flip

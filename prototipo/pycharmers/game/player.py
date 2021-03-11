@@ -4,7 +4,7 @@ Módulo relacionado ao jogador
 
 
 import pygame as pg
-from pycharmers.nodes import PhysicsBody
+from pycharmers.nodes import PhysicsBody, Sprite
 from pycharmers.entities import Entity
 
 
@@ -13,6 +13,9 @@ class PlayerEntity(Entity):
 
     def __init__(self, position: tuple[int, int], size: tuple[int, int]):
         self.__body = PhysicsBody(position, size)
+        self.__sprite = Sprite(pg.image.load(  # type: ignore
+            "assets/python.png")
+        )
 
     def process(self):
         pass
@@ -26,13 +29,18 @@ class PlayerEntity(Entity):
 
         if "left" in pressed:
             self.__body.velocity.x = -2
+            self.__sprite.flip[0] = True
         if "right" in pressed:
             self.__body.velocity.x = 2
+            self.__sprite.flip[0] = False
         if "space" in just_pressed and self.__body.grounded:
             self.__body.velocity.y = -8
 
     def draw(self, surface: pg.Surface):
-        pg.draw.rect(surface, (255, 255, 255), self.__body.shape)
+        surface.blit(
+            self.__sprite.texture,
+            self.__body.shape
+        )
 
 
 class PlayerState:

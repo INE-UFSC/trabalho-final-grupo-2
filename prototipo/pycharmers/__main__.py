@@ -12,9 +12,6 @@ def main():
     display = DisplayManager((320, 240), scale=2)
     inputs = InputManager(mappings)
 
-    # Cria a entity dentro da classe Player
-    player = Player((0, 0), (16, 16))
-
     entity_layer = pg.Surface((320, 240), pg.SRCALPHA)
     tile_layer = pg.Surface((320, 240))
     rects = [
@@ -30,6 +27,8 @@ def main():
 
     for rect in rects:
         pg.draw.rect(tile_layer, (255, 0, 0), rect)
+
+    player = Player((0, 0), (16, 16))
 
     # Loop principal do jogo
     while True:
