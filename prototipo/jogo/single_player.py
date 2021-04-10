@@ -30,6 +30,8 @@ class SinglePlayerGame(arcade.View):
 
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
+        self.player.state.isInPortal = False
+        self.player.state.isWithKey = False
         self.player.player_sprite.center_x = 192
         self.player.player_sprite.center_y = 192
         self.player.score = 0
