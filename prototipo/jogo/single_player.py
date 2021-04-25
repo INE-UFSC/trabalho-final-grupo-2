@@ -1,6 +1,6 @@
 import arcade
-import constants
-import views
+#import constants
+import controller
 from player import Player
 
 
@@ -27,6 +27,7 @@ class SinglePlayerGame(arcade.View):
         self.level = 1
 
         self.level_finished = 0
+        self.controlador = controller.Controller()
 
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
@@ -105,7 +106,7 @@ class SinglePlayerGame(arcade.View):
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite,
                                                              self.wall_list,
-                                                             constants.Constants().GRAVITY)
+                                                             self.controlador.GRAVITY)
         self.player_list.append(self.player.player_sprite)
 
     def on_draw(self):
@@ -133,11 +134,11 @@ class SinglePlayerGame(arcade.View):
 
         if key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump():
-                self.player.player_sprite.change_y = constants.Constants().PLAYER_JUMP_SPEED
+                self.player.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            self.player.player_sprite.change_x = -constants.Constants().PLAYER_MOVEMENT_SPEED
+            self.player.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player.player_sprite.change_x = constants.Constants().PLAYER_MOVEMENT_SPEED
+            self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -183,7 +184,7 @@ class SinglePlayerGame(arcade.View):
                 self.level_finished += 1
                 self.level += 1
                 if self.level_finished == 4:
-                    ini_view = views.FinishView()
+                    ini_view = controller.Controller().finish_view()
                     self.window.show_view(ini_view)
                 else:
                     self.setup(self.level)
