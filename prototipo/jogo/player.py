@@ -1,5 +1,6 @@
 import arcade
 
+
 class PlayerState():
     def __init__(self):
         self.__isWithKey = False
@@ -30,5 +31,3 @@ class Player():
         self.player_sprite.center_y = 192
         self.score = 0
         self.state = PlayerState()
-    
-    

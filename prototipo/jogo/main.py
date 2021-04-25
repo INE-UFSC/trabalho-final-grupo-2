@@ -1,23 +1,21 @@
 import arcade
 import arcade.gui
-#import constants
 from controller import Controller
 
 
 class Game:
-
-
     def main(self):
         """ Main method """
-
-        window = arcade.Window(Controller().SCREEN_WIDTH, Controller().SCREEN_HEIGHT, Controller().SCREEN_TITLE)
-        start_view = Controller().init_view()
-        if Controller().game is not None:
-            start_view = Controller().game
+        controlador = Controller()
+        window = arcade.Window(controlador.SCREEN_WIDTH,
+                               controlador.SCREEN_HEIGHT,
+                               controlador.SCREEN_TITLE)
+        start_view = controlador.init_view()
+        if controlador.game is not None:
+            start_view = controlador.game
 
         window.show_view(start_view)
         arcade.run()
-
 
 if __name__ == "__main__":
     Game().main()

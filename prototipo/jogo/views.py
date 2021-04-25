@@ -1,8 +1,5 @@
 import arcade
 import arcade.gui
-#from constants import Constants
-#from main import Game
-#from single_player import SinglePlayerGame
 import controller
 from arcade.gui import UIManager
 
@@ -106,7 +103,13 @@ class ChoiceView(arcade.View):
             self.window.show_view(choice_view)
         elif key == arcade.key.KEY_2:
             self.ui_manager.purge_ui_elements()
+            #choice_view = self.controlador.single_player('assets/player_spritesheet.png')
             choice_view = self.controlador.single_player('assets/player_spritesheet.png')
+            choice_view.setup(1)
+            self.window.show_view(choice_view)
+        elif key == arcade.key.KEY_3:
+            self.ui_manager.purge_ui_elements()
+            choice_view = self.controlador.multi_player('assets/player_spritesheet.png', 'assets/player_spritesheet2.png')
             choice_view.setup(1)
             self.window.show_view(choice_view)
 
@@ -117,4 +120,3 @@ class ChoiceView(arcade.View):
         self.ui_manager.purge_ui_elements()
         backgound_menu = arcade.load_texture('assets/choicepersonagem.png')
         arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_menu)
-        

@@ -1,5 +1,7 @@
 from views import InitView, ChoiceView, FinishView
-import single_player
+from single_player import SinglePlayerGame
+from multi_player import MultiPlayerGame
+
 
 class Controller:
     def __init__(self):
@@ -16,20 +18,20 @@ class Controller:
 
     def init_view(self):
         '''@return InitView'''
-
         return InitView()
 
     def choice_view(self):
-
+        '''@return ChoiceView'''
         return ChoiceView()
 
     def finish_view(self):
-
+        '''@return FinishView'''
         return FinishView()
 
     def single_player(self, spritesheet: str):
-        return single_player.SinglePlayerGame(spritesheet)
+        '''@return SinglePlayerGame'''
+        return SinglePlayerGame(spritesheet)
 
-    def multi_player(self, spritesheet: str):
-        ''' implementar '''
-        pass
+    def multi_player(self, spritesheet_one: str, spritesheet_two: str):
+        '''@return MultiPlayerGame'''
+        return MultiPlayerGame(spritesheet_one, spritesheet_two)
