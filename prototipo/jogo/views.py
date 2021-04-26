@@ -98,18 +98,18 @@ class ChoiceView(arcade.View):
         """Called whenever a key is pressed. """
         if key == arcade.key.KEY_1:
             self.ui_manager.purge_ui_elements()
-            choice_view = self.controlador.single_player('assets/player_spritesheet2.png')
+            choice_view = self.controlador.single_player('assets/yellow')
             choice_view.setup(1)
             self.window.show_view(choice_view)
         elif key == arcade.key.KEY_2:
             self.ui_manager.purge_ui_elements()
             #choice_view = self.controlador.single_player('assets/player_spritesheet.png')
-            choice_view = self.controlador.single_player('assets/player_spritesheet.png')
+            choice_view = self.controlador.single_player('assets/blue')
             choice_view.setup(1)
             self.window.show_view(choice_view)
         elif key == arcade.key.KEY_3:
             self.ui_manager.purge_ui_elements()
-            choice_view = self.controlador.multi_player('assets/player_spritesheet.png', 'assets/player_spritesheet2.png')
+            choice_view = self.controlador.multi_player('assets/blue', 'assets/yellow')
             choice_view.setup(1)
             self.window.show_view(choice_view)
 

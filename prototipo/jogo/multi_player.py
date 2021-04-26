@@ -92,6 +92,9 @@ class MultiPlayerGame(PlayerGame):
         self.physics_engine_one.update()
         self.physics_engine_two.update()
 
+        self.player_one.update_animation()
+        self.player_two.update_animation()
+
         # See if we hit any coins
         key_hit_list_one = arcade.check_for_collision_with_list(self.player_one.player_sprite,
                                                                 self.key_list)

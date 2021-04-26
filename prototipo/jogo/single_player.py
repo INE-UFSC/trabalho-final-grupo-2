@@ -56,6 +56,7 @@ class SinglePlayerGame(PlayerGame):
 
         # Move the player with the physics engine
         self.physics_engine.update()
+        self.player.update_animation()
 
         # See if we hit any coins
         key_hit_list = arcade.check_for_collision_with_list(self.player.player_sprite,
