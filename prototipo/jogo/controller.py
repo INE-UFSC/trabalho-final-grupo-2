@@ -1,4 +1,4 @@
-from views import InitView, ChoiceView, FinishView
+from views import InitView, ChoiceView, FinishView, CardView, InstruView
 from single_player import SinglePlayerGame
 from multi_player import MultiPlayerGame
 
@@ -27,6 +27,14 @@ class Controller:
     def finish_view(self):
         '''@return FinishView'''
         return FinishView()
+    
+    def card_view(self, card, personagem):
+        '''@return CardView'''
+        return CardView(card, personagem)
+    
+    def instru_view(self, card, personagem):
+        '''@return InstruView'''
+        return InstruView(card, personagem)
 
     def add_card_to_player(self, player):
         pass
