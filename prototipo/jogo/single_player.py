@@ -8,24 +8,26 @@ class SinglePlayerGame(PlayerGame):
         super().__init__(player_img)
         self.player = Player(player_img)
 
-    def setup(self, level):
+    def setup(self, level, savex=192, savey=192):
         """ Set up the game here. Call this function to restart the game. """
         super().setup(level)
         self.player.state.isInPortal = False
         self.player.state.isWithKey = False
-        self.player.player_sprite.center_x = 192
-        self.player.player_sprite.center_y = 192
+        self.player.player_sprite.center_x = savex
+        self.player.player_sprite.center_y = savey
         self.player.score = 0
 
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite,
                                                              self.wall_list,
                                                              self.controlador.GRAVITY)
+
         self.player_list.append(self.player.player_sprite)
 
     def on_draw(self):
         """ Render the screen. """
         super().on_draw()
+        self.player.block_list.draw()
 
         # Draw our score on the screen, scrolling it with the viewport
         score_text = f"Score: {self.player.score}"
@@ -42,6 +44,8 @@ class SinglePlayerGame(PlayerGame):
             self.player.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.KEY_1:
+            self.wall_list.append(self.player.cards[2].power(self.player))
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -55,8 +59,8 @@ class SinglePlayerGame(PlayerGame):
         """ Movement and game logic """
 
         # Move the player with the physics engine
-        self.physics_engine.update()
         self.player.update_animation()
+        self.physics_engine.update()
 
         # See if we hit any coins
         key_hit_list = arcade.check_for_collision_with_list(self.player.player_sprite,
@@ -77,7 +81,7 @@ class SinglePlayerGame(PlayerGame):
         # Is the player dead?
         for key in damage_hit_list:
             key.remove_from_sprite_lists()
-            self.setup(self.level)
+            self.setup(self.level, self.player.savex, self.player.savey)
 
         # Is the player in the portal?
         if arcade.check_for_collision_with_list(self.player.player_sprite,
@@ -99,3 +103,4 @@ class SinglePlayerGame(PlayerGame):
             self.view_left = 0
             self.view_bottom = 0
             changed_viewport = True
+

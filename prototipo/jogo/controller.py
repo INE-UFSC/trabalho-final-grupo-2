@@ -28,6 +28,9 @@ class Controller:
         '''@return FinishView'''
         return FinishView()
 
+    def add_card_to_player(self, player):
+        pass
+
     def single_player(self, spritesheet: str):
         '''@return SinglePlayerGame'''
         return SinglePlayerGame(spritesheet)
