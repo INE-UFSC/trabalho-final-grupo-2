@@ -87,6 +87,7 @@ class ChoiceView(arcade.View):
         self.ui_manager = UIManager()
         self.controlador = controller.Controller()
 
+    
     def on_show(self):
         """ This is run once when we switch to this view """
         arcade.set_background_color(arcade.color.BLEU_DE_FRANCE)
@@ -98,20 +99,25 @@ class ChoiceView(arcade.View):
         """Called whenever a key is pressed. """
         if key == arcade.key.KEY_1:
             self.ui_manager.purge_ui_elements()
-            choice_view = self.controlador.single_player('assets/yellow')
-            choice_view.setup(1)
+            card = None
+            personagem = 1
+            choice_view = self.controlador.card_view(card, personagem)
             self.window.show_view(choice_view)
         elif key == arcade.key.KEY_2:
             self.ui_manager.purge_ui_elements()
-            #choice_view = self.controlador.single_player('assets/player_spritesheet.png')
-            choice_view = self.controlador.single_player('assets/blue')
-            choice_view.setup(1)
+            card = None
+            personagem = 2
+            choice_view = self.controlador.card_view()
             self.window.show_view(choice_view)
+            #choice_view = self.controlador.single_player('assets/player_spritesheet.png')
+            
         elif key == arcade.key.KEY_3:
             self.ui_manager.purge_ui_elements()
-            choice_view = self.controlador.multi_player('assets/blue', 'assets/yellow')
-            choice_view.setup(1)
+            card = 1
+            personagem = None
+            choice_view = self.controlador.card_view(card, personagem)
             self.window.show_view(choice_view)
+
 
     def on_draw(self):
         """ Draw this view """
@@ -120,3 +126,68 @@ class ChoiceView(arcade.View):
         self.ui_manager.purge_ui_elements()
         backgound_menu = arcade.load_texture('assets/choicepersonagem.png')
         arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_menu)
+
+class CardView(arcade.View):
+    def __init__(self, card, personagem):
+        super().__init__()
+        self.ui_manager = UIManager()
+        self.controlador = controller.Controller()
+        self.card = card
+        self.personagem = personagem
+    
+    def on_show(self):
+        """ This is run once when we switch to this view """
+        arcade.set_background_color(arcade.color.BLEU_DE_FRANCE)
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, self.controlador.SCREEN_WIDTH - 1, 0, self.controlador.SCREEN_HEIGHT - 1)
+    
+    def on_draw(self):
+        arcade.start_render()
+        self.ui_manager.purge_ui_elements()
+        if self.card is not None:
+            y_slot = self.window.height // 4
+            left_column_x = self.window.width // 2
+            backgound_cards = arcade.load_texture('assets/cartas.png')
+            arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_cards)
+        else:
+            y_slot = self.window.height // 4
+            left_column_x = self.window.width // 2
+            backgound_cards = arcade.load_texture('assets/cartas_single.png')
+            arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_cards)
+        
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        self.window.show_view(self.controlador.instru_view(self.card, self.personagem))
+
+class InstruView(arcade.View):
+    def __init__(self, card, personagem):
+        super().__init__()
+        self.ui_manager = UIManager()
+        self.controlador = controller.Controller()
+        self.card = card
+        self.personagem = personagem
+            
+    def on_draw(self):
+        arcade.start_render()
+        self.ui_manager.purge_ui_elements()
+        y_slot = self.window.height // 4
+        left_column_x = self.window.width // 2
+        backgound_instru = arcade.load_texture('assets/instrucoes.png')
+        arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_instru)
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        if self.card  != None:
+            choice_view = self.controlador.multi_player('assets/blue', 'assets/yellow')
+            choice_view.setup(1)
+            self.window.show_view(choice_view)
+        else:
+            if self.personagem == 1:
+                choice_view = self.controlador.single_player('assets/yellow')
+                choice_view.setup(1)
+                self.window.show_view(choice_view)
+            else:
+                choice_view = self.controlador.single_player('assets/blue')
+                choice_view.setup(1)
+                self.window.show_view(choice_view)
+    
