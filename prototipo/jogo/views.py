@@ -107,7 +107,7 @@ class ChoiceView(arcade.View):
             self.ui_manager.purge_ui_elements()
             card = None
             personagem = 2
-            choice_view = self.controlador.card_view()
+            choice_view = self.controlador.card_view(card, personagem)
             self.window.show_view(choice_view)
             #choice_view = self.controlador.single_player('assets/player_spritesheet.png')
             
