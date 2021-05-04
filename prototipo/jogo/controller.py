@@ -1,6 +1,7 @@
 from views import InitView, ChoiceView, FinishView, CardView, InstruView
 from single_player import SinglePlayerGame
 from multi_player import MultiPlayerGame
+from cards import BoxCard, SaveCard, SilentCard, JumpCard
 
 
 class Controller:
@@ -35,6 +36,10 @@ class Controller:
     def instru_view(self, card, personagem):
         '''@return InstruView'''
         return InstruView(card, personagem)
+
+    def get_all_cards(self) -> list:
+        '''@return all possible cards: list'''
+        return [JumpCard(), SaveCard(), BoxCard(), SilentCard()]
 
     def add_card_to_player(self, player):
         pass

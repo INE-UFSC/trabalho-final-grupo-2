@@ -16,6 +16,7 @@ class SinglePlayerGame(PlayerGame):
         self.player.player_sprite.center_x = savex
         self.player.player_sprite.center_y = savey
         self.player.score = 0
+        self.player.cards = (self.controlador.get_all_cards())
 
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player.player_sprite,
@@ -45,7 +46,13 @@ class SinglePlayerGame(PlayerGame):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.KEY_1:
+            self.player.cards[0].power(self.player)
+        elif key == arcade.key.KEY_2:
+            self.player.cards[1].power(self.player)
+        elif key == arcade.key.KEY_3:
             self.wall_list.append(self.player.cards[2].power(self.player))
+        elif key == arcade.key.KEY_4:
+            self.player.cards[3].power(self.player)
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """

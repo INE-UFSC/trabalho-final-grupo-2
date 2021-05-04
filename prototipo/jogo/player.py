@@ -56,7 +56,7 @@ class Player():
         self.savey = 192
         self.savex = 192
         self.block_list = arcade.SpriteList(use_spatial_hash=True)
-        self.cards = [JumpCard(), SaveCard(), BoxCard(), SilentCard()]
+        self.cards = []
         self.score = 0
         self.state = PlayerState()
         self.face_direction = RIGHT_FACING
