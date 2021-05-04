@@ -149,12 +149,12 @@ class CardView(arcade.View):
         if self.card is not None:
             y_slot = self.window.height // 4
             left_column_x = self.window.width // 2
-            backgound_cards = arcade.load_texture('assets/cartas.png')
+            backgound_cards = arcade.load_texture('assets/cartas.jpg')
             arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_cards)
         else:
             y_slot = self.window.height // 4
             left_column_x = self.window.width // 2
-            backgound_cards = arcade.load_texture('assets/cartas_single.png')
+            backgound_cards = arcade.load_texture('assets/cartas_single.jpg')
             arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_cards)
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
@@ -173,7 +173,7 @@ class InstruView(arcade.View):
         self.ui_manager.purge_ui_elements()
         y_slot = self.window.height // 4
         left_column_x = self.window.width // 2
-        backgound_instru = arcade.load_texture('assets/instrucoes.png')
+        backgound_instru = arcade.load_texture('assets/instruções.jpg')
         arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_instru)
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
