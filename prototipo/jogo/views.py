@@ -124,7 +124,7 @@ class ChoiceView(arcade.View):
         arcade.start_render()
         """ Set up this view. """
         self.ui_manager.purge_ui_elements()
-        backgound_menu = arcade.load_texture('assets/choicepersonagem.png')
+        backgound_menu = arcade.load_texture('assets/choice_view.jpg')
         arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_menu)
 
 class CardView(arcade.View):
