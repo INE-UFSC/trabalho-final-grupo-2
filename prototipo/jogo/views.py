@@ -72,9 +72,11 @@ class FinishView(arcade.View):
     def on_draw(self):
         """ Draw this view """
         arcade.start_render()
-        arcade.draw_text("Você terminou o jogo!", self.controlador.SCREEN_WIDTH / 2, self.controlador.SCREEN_HEIGHT / 2,
-                         arcade.color.BLACK, font_size=50, anchor_x="center")
         """ Set up this view. """
+        self.ui_manager.purge_ui_elements()
+        backgound_menu = arcade.load_texture('assets/fim_de_jogo.jpg')
+        arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT, backgound_menu)
+        
         self.ui_manager.purge_ui_elements()
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):

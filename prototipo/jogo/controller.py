@@ -44,6 +44,10 @@ class Controller:
     def add_card_to_player(self, player):
         pass
 
+    def get_cards(self) -> list:
+        '''@return card selected by player: List'''
+        return []
+    
     def single_player(self, spritesheet: str):
         '''@return SinglePlayerGame'''
         return SinglePlayerGame(spritesheet)

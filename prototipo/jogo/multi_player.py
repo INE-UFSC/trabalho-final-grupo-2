@@ -18,13 +18,14 @@ class MultiPlayerGame(PlayerGame):
         self.player_one.player_sprite.center_x = 192
         self.player_one.player_sprite.center_y = 192
         self.player_one.score = 0
+        self.player_one.cards = (self.controlador.get_cards())
 
         self.player_two.state.isInPortal = False
         self.player_two.state.isWithKey = False
         self.player_two.player_sprite.center_x = 192
         self.player_two.player_sprite.center_y = 192
         self.player_two.score = 0
-
+        self.player_two.cards = (self.controlador.get_cards())
         # Create the 'physics engine'
         self.physics_engine_one = arcade.PhysicsEnginePlatformer(self.player_one.player_sprite,
                                                              self.wall_list,
@@ -60,7 +61,12 @@ class MultiPlayerGame(PlayerGame):
             self.player_one.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.D:
             self.player_one.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
-
+        ####mudar
+        elif key == arcade.key.KEY_1:
+            self.player_one.cards[0].power(self.player_one)
+        elif key == arcade.key.KEY_2:
+            self.player_one.cards[1].power(self.player_one)
+        
         #player two
         if key == arcade.key.UP:
             if self.physics_engine_two.can_jump():
@@ -69,7 +75,12 @@ class MultiPlayerGame(PlayerGame):
             self.player_two.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
             self.player_two.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
-
+        ####mudar
+        elif key == arcade.key.B:
+            self.player_two.cards[0].power(self.player_two)
+        elif key == arcade.key.N:
+            self.player_two.cards[1].power(self.player_two)
+            
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
 

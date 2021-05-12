@@ -51,4 +51,3 @@ class SilentCard(Card):
         player.savex = player.player_sprite.position[0]
         player.savey = player.player_sprite.position[1]
 
-
