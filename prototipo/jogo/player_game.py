@@ -28,6 +28,13 @@ class PlayerGame(arcade.View):
         self.level_finished = 0
         self.controlador = controller.Controller()
 
+        try:
+            self.collect_sound = arcade.load_sound("assets/sounds/coin.wav")
+            self.jump_sound = arcade.load_sound("assets/sounds/jumping.wav")
+            self.block_sound = arcade.load_sound("assets/sounds/block.wav")
+        except FileNotFoundError:
+            print("missing collect sounds")
+
     def setup(self, level):
         # Create the Sprite lists
         self.player_list = arcade.SpriteList()

@@ -125,6 +125,7 @@ class MultiPlayerGame(PlayerGame):
             # Add score
             self.player_one.score += 50
             self.player_one.state.isWithKey = True
+            arcade.play_sound(self.collect_sound)
 
         for key in key_hit_list_two:
             # Remove the coin
@@ -132,6 +133,7 @@ class MultiPlayerGame(PlayerGame):
             # Add score
             self.player_two.score += 50
             self.player_two.state.isWithKey = True
+            arcade.play_sound(self.collect_sound)
 
         # Track if we need to change the viewport
         changed_viewport = False

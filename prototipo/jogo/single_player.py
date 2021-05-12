@@ -41,16 +41,19 @@ class SinglePlayerGame(PlayerGame):
         if key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump():
                 self.player.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
+                arcade.play_sound(self.jump_sound)
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.KEY_1:
             self.player.cards[0].power(self.player)
+            arcade.play_sound(self.jump_sound)
         elif key == arcade.key.KEY_2:
             self.player.cards[1].power(self.player)
         elif key == arcade.key.KEY_3:
             self.wall_list.append(self.player.cards[2].power(self.player))
+            arcade.play_sound(self.block_sound)
         elif key == arcade.key.KEY_4:
             self.player.cards[3].power(self.player)
 
@@ -81,6 +84,7 @@ class SinglePlayerGame(PlayerGame):
             # Add score
             self.player.score += 50
             self.player.state.isWithKey = True
+            arcade.play_sound(self.collect_sound)
 
         # Track if we need to change the viewport
         changed_viewport = False
