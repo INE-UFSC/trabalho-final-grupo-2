@@ -12,7 +12,7 @@ class PlayerGame(arcade.View):
         # Don't show the mouse cursor
         self.window.set_mouse_visible(True)
 
-        arcade.set_background_color(arcade.color.BLEU_DE_FRANCE)
+        arcade.set_background_color(arcade.color.DARK_VANILLA)
         self.key_list = None
         self.wall_list = None
         self.portal_list = None
@@ -54,10 +54,10 @@ class PlayerGame(arcade.View):
         key_layer_name = 'chave'
         # Name of the layer that has the user  portal
         portal_layer_name = 'gate'
-        # Name of the layer that has items for background
-        background_layer_name = 'fundo'
         # Name of the layer that has damage platforms
         damage_layer_name = 'damage'
+        # Name of the layer that has background
+        background_layer_name = 'background'
 
         # Map name
 
@@ -100,7 +100,7 @@ class PlayerGame(arcade.View):
         # --- Other stuff
         # Set the background color
         if my_map.background_color:
-            arcade.set_background_color(my_map.background_color)
+            arcade.set_background_color(218, 138, 103)
 
     def on_draw(self):
         """ Render the screen. """

@@ -40,6 +40,7 @@ class SinglePlayerGame(PlayerGame):
 
         if key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine.can_jump():
+                self.physics_engine.increment_jump_counter()
                 self.player.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
                 arcade.play_sound(self.jump_sound)
         elif key == arcade.key.LEFT or key == arcade.key.A:
@@ -47,7 +48,9 @@ class SinglePlayerGame(PlayerGame):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.KEY_1:
-            self.player.cards[0].power(self.player)
+            self.physics_engine.enable_multi_jump(2)
+            
+            #self.player.cards[0].power(self.player)
             arcade.play_sound(self.jump_sound)
         elif key == arcade.key.KEY_2:
             self.player.cards[1].power(self.player)
@@ -102,7 +105,7 @@ class SinglePlayerGame(PlayerGame):
                 self.player.state.isInPortal = True
                 self.level_finished += 1
                 self.level += 1
-                if self.level_finished == 4:
+                if self.level_finished == 9:
                     ini_view = controller.Controller().finish_view()
                     self.window.show_view(ini_view)
                 else:
