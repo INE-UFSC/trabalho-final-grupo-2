@@ -58,9 +58,9 @@ class ChoiceView(arcade.View):
         choice = arcade.get_sprites_at_point((x, y), self.personagem_list)
         if len(choice) > 0:
             if choice[0].tipo == 1:
-                self.controlador.card_view(Player('assets/yellow'))
+                self.window.show_view(self.controlador.card_view(Player('assets/yellow')))
             else:
-                self.controlador.card_view(Player('assets/blue'))
+               self.window.show_view(self.controlador.card_view(Player('assets/blue')))
 
 
 class CardView(arcade.View):
@@ -81,21 +81,15 @@ class CardView(arcade.View):
     def on_draw(self):
         arcade.start_render()
         self.ui_manager.purge_ui_elements()
-        if self.card is not None:
-            y_slot = self.window.height // 4
-            left_column_x = self.window.width // 2
-            backgound_cards = arcade.load_texture('assets/cartas.jpg')
-            arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT,
+        y_slot = self.window.height // 4
+        left_column_x = self.window.width // 2
+        backgound_cards = arcade.load_texture('assets/cartas_single.jpg')
+        arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT,
                                                 backgound_cards)
-        else:
-            y_slot = self.window.height // 4
-            left_column_x = self.window.width // 2
-            backgound_cards = arcade.load_texture('assets/cartas_single.jpg')
-            arcade.draw_lrwh_rectangle_textured(0, 0, self.controlador.SCREEN_WIDTH, self.controlador.SCREEN_HEIGHT,
-                                                backgound_cards)
-
     def on_mouse_press(self, _x, _y, _button, _modifiers):
-        self.window.show_view(self.controlador.single_player(self.personagem))
+        single = self.controlador.single_player(self.personagem)
+        single.setup(1)
+        self.window.show_view(single)
 
 
 # Multi player views

@@ -16,7 +16,7 @@ class PlayerState():
         self.__countSave = 0
         self.__savey = 192
         self.__savex = 192
-        self.__score = 0
+        self.__score = 100
 
     @property
     def savey(self):
@@ -89,6 +89,10 @@ class PlayerDeck():
     def add_card(self, card):
         self.__cards.append(card)
 
+    def add_list_cards(self, cards):
+        for c in cards:
+            self.__cards.append(c)
+
     def add_blocks(self, blocks):
         self.__block_list.append(blocks)
 
@@ -97,20 +101,20 @@ class PlayerDeck():
 
 class Player():
     def __init__(self, image_source):
-        self.__image_source = image_source
-        self.__player_sprite = arcade.Sprite(f"{image_source}_idle.png", 3)
-        self.__player_sprite.center_x = 192
-        self.__player_sprite.center_y = 192
+        self.image_source = image_source
+        self.player_sprite = arcade.Sprite(f"{image_source}_idle.png", 3)
+        self.player_sprite.center_x = 192
+        self.player_sprite.center_y = 192
         self.__player_deck = PlayerDeck()
         self.__player_state = PlayerState()
-        self.__face_direction = RIGHT_FACING
-        self.__jumping = 0
-        self.__current_texture = 0
-        self.__idle_texture_pair = self.load_texture_pair(f"{image_source}_idle.png")
-        self.__walk_textures = []
+        self.face_direction = RIGHT_FACING
+        self.jumping = 0
+        self.current_texture = 0
+        self.idle_texture_pair = self.load_texture_pair(f"{image_source}_idle.png")
+        self.walk_textures = []
         for i in range(2):
             texture = self.load_texture_pair(f"{image_source}_walk_{i}.png")
-            self.__walk_textures.append(texture)
+            self.walk_textures.append(texture)
 
         # self.player_sprite.update_animation()
 
@@ -163,3 +167,4 @@ class Player():
         elif self.jumping == 2:
             falling = self.load_texture_pair(f"{self.image_source}_jump_1.png")
             self.player_sprite.texture = falling[self.face_direction]
+

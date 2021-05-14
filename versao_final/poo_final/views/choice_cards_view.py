@@ -6,7 +6,7 @@ from model.cards import SilentCard, JumpCard, SaveCard, BoxCard
 from model.player import Player
 
 
-class Card(arcade.Sprite):
+class Card_shape(arcade.Sprite):
     def __init__(self, filename, tipo, scale=0.75):
 
         self.image_file_name = filename
@@ -51,30 +51,30 @@ class SelectCardsView(arcade.View):
         middle_x = self.window.width // 5
 
         self.cards_list = arcade.SpriteList()
-        b1 = Card('assets/Encapsulamento_button.jpg', SaveCard())
+        b1 = Card_shape('assets/Encapsulamento_button.jpg', SaveCard())
         b1.position = middle_x *1 , y_slot * 1
         self.cards_list.append(b1)
-        b2 = Card('assets/expl_silenciados_button.jpg', SilentCard())
+        b2 = Card_shape('assets/expl_silenciados_button.jpg', SilentCard())
         b2.position = middle_x * 2, y_slot * 1
         self.cards_list.append(b2)
-        b3 = Card('assets/instanciar_button.jpg', BoxCard())
+        b3 = Card_shape('assets/instanciar_button.jpg', BoxCard())
         b3.position = middle_x * 3, y_slot * 1
         self.cards_list.append(b3)
-        b4 = Card('assets/polimorfismo_button.jpg', JumpCard())
+        b4 = Card_shape('assets/polimorfismo_button.jpg', JumpCard())
         b4.position = middle_x * 4, y_slot * 1
         self.cards_list.append(b4)
 
     def on_mouse_press(self, x, y, _button, _modifiers):
         choice = arcade.get_sprites_at_point((x, y), self.cards_list)
         if len(choice) > 0:
-            if len(self.player_1.cards) < 2:
-                self.player_1.cards.append(choice[0].tipo)
-                self.text = f"Jogador azul escolha carta {len(self.player_1.cards)}/2"
-            elif len(self.player_2.cards) < 2:
-                self.player_2.cards.append(choice[0].tipo)
-                print(self.player_2.cards)
-                self.text = f"Jogador amarelo escolha carta {len(self.player_2.cards)}/2"
-                if len(self.player_2.cards) == 2:
+            if len(self.player_1.deck().cards()) < 2:
+                self.player_1.deck().add_card(choice[0].tipo)
+                self.text = f"Jogador azul escolha carta {len(self.player_1.deck().cards())}/2"
+            elif len(self.player_2.deck().cards()) < 2:
+                self.player_2.deck().add_card(choice[0].tipo)
+                print(self.player_2.deck().cards())
+                self.text = f"Jogador amarelo escolha carta {len(self.player_2.deck().cards())}/2"
+                if len(self.player_2.deck().cards()) == 2:
                     choice_view = self.controlador.multi_player(self.player_1, self.player_2)
                     choice_view.setup(1)
                     self.window.show_view(choice_view)

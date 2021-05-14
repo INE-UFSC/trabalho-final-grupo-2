@@ -32,7 +32,7 @@ class BoxCard(Card):
     def power(self, player):
         wall = arcade.Sprite(":resources:images/tiles/boxCrate_double.png", 0.25)
         wall.position = player.player_sprite.position
-        player.block_list.append(wall)
+        player.deck().add_blocks(wall)
 
     def __str__(self):
         return "Box"
@@ -44,8 +44,8 @@ class SaveCard(Card):
         pass
 
     def power(self, player):
-        player.state.isSave = True
-        player.state.countSave = 60
+        player.state().isSave = True
+        player.state().countSave = 60
 
     def __str__(self):
         return "Save"
@@ -56,8 +56,8 @@ class SilentCard(Card):
         pass
 
     def power(self, player):
-        player.savex = player.player_sprite.position[0]
-        player.savey = player.player_sprite.position[1]
+        player.state().savex = player.player_sprite.position[0]
+        player.state().savey = player.player_sprite.position[1]
 
     def __str__(self):
         return "Silent"

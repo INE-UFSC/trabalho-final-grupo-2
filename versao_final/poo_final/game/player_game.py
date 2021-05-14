@@ -1,9 +1,7 @@
 import arcade
 from controller import controller
 
-"""
-Classe que define as interações do jogo
-"""
+
 
 class PlayerGame(arcade.View):
     def __init__(self):
@@ -27,7 +25,14 @@ class PlayerGame(arcade.View):
         # Level
         self.level = 1
 
+        self.level_finished = 0
         self.controlador = controller.Controller()
+        try:
+            self.collect_sound = arcade.load_sound("assets/sounds/coin.wav")
+            self.jump_sound = arcade.load_sound("assets/sounds/jumping.wav")
+            self.block_sound = arcade.load_sound("assets/sounds/block.wav")
+        except FileNotFoundError:
+            print("missing collect sounds")
 
     def setup(self, level):
         # Create the Sprite lists

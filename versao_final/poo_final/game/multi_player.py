@@ -4,7 +4,7 @@ from game.player_game import PlayerGame
 from model.player import Player
 import pickle
 
-from model.save_game import SaveMultiPlayer
+from model.save_gamee import SaveMultiPlayer
 
 
 class MultiPlayerGame(PlayerGame):
@@ -57,29 +57,38 @@ class MultiPlayerGame(PlayerGame):
         # player one
         if key == arcade.key.W:
             if self.physics_engine_one.can_jump():
+                arcade.play_sound(self.jump_sound)
                 self.player_one.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
         elif key == arcade.key.A:
             self.player_one.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.D:
             self.player_one.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
 
-        elif key == arcade.key.KEY_1:
-            self.player_one.deck.cards()[0].power(self.player_one)
-        elif key == arcade.key.KEY_2:
-            self.player_one.deck.cards()[1].power(self.player_one)
+        if self.player_one.state().score > 5:
+            if key == arcade.key.KEY_1:
+                self.player_one.deck().cards()[0].power(self.player_one)
+                self.player_two.state().score = -5
+            elif key == arcade.key.KEY_2:
+                self.player_one.deck().cards()[1].power(self.player_one)
+                self.player_two.state().score = -5
 
         # player two
         if key == arcade.key.UP:
             if self.physics_engine_two.can_jump():
+                arcade.play_sound(self.jump_sound)
                 self.player_two.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
         elif key == arcade.key.LEFT:
             self.player_two.player_sprite.change_x = -self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.RIGHT:
             self.player_two.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
-        elif key == arcade.key.B:
-            self.player_two.deck.cards()[0].power(self.player_two)
-        elif key == arcade.key.M:
-            self.player_two.deck.cards()[1].power(self.player_two)
+
+        if self.player_two.state().score > 5:
+            if key == arcade.key.B:
+                self.player_two.deck().cards()[0].power(self.player_two)
+                self.player_two.state().score = -5
+            elif key == arcade.key.N:
+                self.player_two.deck().cards()[1].power(self.player_two)
+                self.player_two.state().score = -5
 
 
     def on_key_release(self, key, modifiers):
@@ -99,9 +108,9 @@ class MultiPlayerGame(PlayerGame):
 
     def update(self, level):
         """ Movement and game logic """
-        for i in self.player_one.block_list:
+        for i in self.player_one.deck().blocks():
             self.wall_list.append(i)
-        for i in self.player_two.block_list:
+        for i in self.player_two.deck().blocks():
             self.wall_list.append(i)
         self.player_one.deck().clean_blocks()
         self.player_two.deck().clean_blocks()
@@ -131,6 +140,7 @@ class MultiPlayerGame(PlayerGame):
             # Add score
             self.player_one.state().score = 50
             self.player_one.state().isWithKey = True
+            arcade.play_sound(self.collect_sound)
 
         for key in key_hit_list_two:
             # Remove the coin
@@ -138,7 +148,7 @@ class MultiPlayerGame(PlayerGame):
             # Add score
             self.player_two.state().score = 50
             self.player_two.state().isWithKey = True
-
+            arcade.play_sound(self.collect_sound)
         # Track if we need to change the viewport
         changed_viewport = False
 
@@ -146,13 +156,15 @@ class MultiPlayerGame(PlayerGame):
         for key in damage_hit_list_one:
             key.remove_from_sprite_lists()
             if self.player_one.state().isSave == True:
-                self.player_one.state().countSave = self.player_one.state.countSave - 10
+                self.player_one.state().countSave = self.player_one.state().countSave - 10
                 self.player_one.player_sprite.change_y = self.controlador.PLAYER_JUMP_SPEED
                 if self.player_one.state().countSave == 0:
                     self.player_one.state().isSave = False
             else:
+
                 self.setup(self.level, self.player_one.state().savex, self.player_two.player_sprite.center_x,
                            self.player_one.state().savey, self.player_two.player_sprite.center_y)
+                self.player_one.state().score = -20
 
         for key in damage_hit_list_two:
             key.remove_from_sprite_lists()
@@ -164,13 +176,14 @@ class MultiPlayerGame(PlayerGame):
             else:
                 self.setup(self.level, self.player_one.player_sprite.center_x, self.player_two.state().savex,
                            self.player_one.player_sprite.center_y, self.player_two.state().savey)
+                self.player_two.state().score = -20
 
         # Is the player in the portal?
         if arcade.check_for_collision_with_list(self.player_one.player_sprite,
                                                 self.portal_list):
 
-            if self.player_one.state.isWithKey:
-                self.player_one.state.isInPortal = True
+            if self.player_one.state().isWithKey:
+                self.player_one.state().isInPortal = True
                 self.level += 1
                 if self.level == 4:
                     if self.player_two.state().score > self.player_one.state().score:
@@ -193,8 +206,8 @@ class MultiPlayerGame(PlayerGame):
         if arcade.check_for_collision_with_list(self.player_two.player_sprite,
                                                 self.portal_list):
 
-            if self.player_two.state.isWithKey:
-                self.player_two.state.isInPortal = True
+            if self.player_two.state().isWithKey:
+                self.player_two.state().isInPortal = True
                 self.level += 1
                 if self.level == 4:
                     if self.player_two.state().score > self.player_one.state().score:
@@ -214,5 +227,6 @@ class MultiPlayerGame(PlayerGame):
 
     def on_close(self):
         """Called when this view is not shown anymore"""
-        #SaveMultiPlayer(self.player_one, self.player_two, self.level).save()
+        SaveMultiPlayer(self.controlador, self.player_one, self.player_two, self.level).save()
         print("ENCERRADO")
+
