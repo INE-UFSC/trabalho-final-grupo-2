@@ -38,7 +38,7 @@ class ReturnView(arcade.View):
                                             backgound_menu)
         self.buttons_list.draw()
 
-        arcade.draw_text("Continuar última partida", self.window.width // 2 , self.window.height // 4 * 1,
+        arcade.draw_text("Continuar", self.window.width // 2 , self.window.height // 4 * 1,
                          arcade.csscolor.BLACK, 18, align="center",
                          anchor_x="center", anchor_y="center", font_name='assets/Boxy-Bold.ttf')
 

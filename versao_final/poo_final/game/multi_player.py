@@ -210,7 +210,7 @@ class MultiPlayerGame(PlayerGame):
             if self.player_two.state().isWithKey:
                 self.player_two.state().isInPortal = True
                 self.level += 1
-                if self.level == 4:
+                if self.level == 10:
                     if self.player_two.state().score > self.player_one.state().score:
                         ini_view = self.controlador.finish_view("Azul vence")
                     else:

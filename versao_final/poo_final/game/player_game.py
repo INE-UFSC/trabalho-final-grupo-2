@@ -14,7 +14,7 @@ class PlayerGame(arcade.View, ABC):
         # Don't show the mouse cursor
         self.window.set_mouse_visible(True)
 
-        arcade.set_background_color(arcade.color.BLEU_DE_FRANCE)
+        arcade.set_background_color(arcade.color.DARK_VANILLA)
         self.key_list = None
         self.wall_list = None
         self.portal_list = None
@@ -56,7 +56,7 @@ class PlayerGame(arcade.View, ABC):
         # Name of the layer that has the user  portal
         portal_layer_name = 'gate'
         # Name of the layer that has items for background
-        background_layer_name = 'fundo'
+        background_layer_name = 'background'
         # Name of the layer that has damage platforms
         damage_layer_name = 'damage'
 

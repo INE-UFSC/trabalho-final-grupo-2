@@ -115,7 +115,7 @@ class SinglePlayerGame(PlayerGame):
             if self.player.state().isWithKey:
                 self.player.state().isInPortal = True
                 self.level += 1
-                if self.level == 9:
+                if self.level == 10:
                     ini_view = self.controlador.finish_view("Você terminou o jogo")
                     self.window.show_view(ini_view)
                 else:
