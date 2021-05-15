@@ -130,5 +130,3 @@ class SinglePlayerGame(PlayerGame):
     def on_close(self):
         """Called when this view is not shown anymore"""
         SaveSinglePlayer(self.controlador, self.player, self.level).save()
-        print("ENCERRADO")
-

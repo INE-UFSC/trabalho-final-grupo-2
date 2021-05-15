@@ -72,7 +72,6 @@ class SelectCardsView(arcade.View):
                 self.text = f"Jogador azul escolha carta {len(self.player_1.deck().cards())}/2"
             elif len(self.player_2.deck().cards()) < 2:
                 self.player_2.deck().add_card(choice[0].tipo)
-                print(self.player_2.deck().cards())
                 self.text = f"Jogador amarelo escolha carta {len(self.player_2.deck().cards())}/2"
                 if len(self.player_2.deck().cards()) == 2:
                     choice_view = self.controlador.multi_player(self.player_1, self.player_2)

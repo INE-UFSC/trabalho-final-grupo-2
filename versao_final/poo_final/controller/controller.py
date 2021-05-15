@@ -46,9 +46,6 @@ class Controller:
         '''@return all possible cards: list'''
         return [JumpCard(), SaveCard(), BoxCard(), SilentCard()]
 
-    def add_card_to_player(self, player):
-        pass
-
     def select_cards_view(self):
         return SelectCardsView()
 
@@ -60,8 +57,6 @@ class Controller:
         '''@return MultiPlayerGame'''
         return MultiPlayerGame(spritesheet_one, spritesheet_two)
 
-    def select_cards_view(self):
-        return SelectCardsView()
 
 class SingletonMeta(type):
     """

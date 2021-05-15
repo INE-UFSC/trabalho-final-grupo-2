@@ -228,5 +228,3 @@ class MultiPlayerGame(PlayerGame):
     def on_close(self):
         """Called when this view is not shown anymore"""
         SaveMultiPlayer(self.controlador, self.player_one, self.player_two, self.level).save()
-        print("ENCERRADO")
-

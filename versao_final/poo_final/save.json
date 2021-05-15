@@ -1,1 +1,1 @@
-{"mode": "singleplayer", "player_front": "assets/blue", "Player_score": 150, "Nivel": 2, "Player_savex": 192, "Player_savey": 88.0}
+{"mode": "multiplayer", "Player1_score": 5, "Player2_score": 100, "Nivel": 1, "Player1_savex": 1154.0, "Player1_savey": 536.0, "Player1_cards": ["Box", "Jump"], "Player2_savex": 862.0, "Player2_savey": 312.0, "Player2_cards": ["Save", "Silent"]}
