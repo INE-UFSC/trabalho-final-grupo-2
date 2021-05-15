@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"mode": "multiplayer", "Player1_score": 100, "Player2_score": -65, "Nivel": 1, "Player1_savex": 452.0, "Player1_savey": 256.0, "Player1_cards": ["Box", "Jump"], "Player2_savex": 1115.0, "Player2_savey": 216.0, "Player2_cards": ["Save", "Silent"]}
+=======
+{"mode": "multiplayer", "Player1_score": 80, "Player2_score": 100, "Nivel": 2, "Player1_savex": 482.0, "Player1_savey": 296.0, "Player1_cards": ["Box", "Jump"], "Player2_savex": 192, "Player2_savey": 88.0, "Player2_cards": ["Silent", "Save"]}
+>>>>>>> b0a3c82bae2f7b3ac546882763ab3fe534a148c3

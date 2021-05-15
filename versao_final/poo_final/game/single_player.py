@@ -13,6 +13,7 @@ class SinglePlayerGame(PlayerGame):
     def setup(self, level, savex=192, savey=192):
         """ Set up the game here. Call this function to restart the game. """
         super().setup(level)
+        self.level = level
 
         self.player.state().isInPortal = False
         self.player.state().isWithKey = False
@@ -114,7 +115,7 @@ class SinglePlayerGame(PlayerGame):
             if self.player.state().isWithKey:
                 self.player.state().isInPortal = True
                 self.level += 1
-                if self.level == 4:
+                if self.level == 9:
                     ini_view = self.controlador.finish_view("Você terminou o jogo")
                     self.window.show_view(ini_view)
                 else:
@@ -130,5 +131,3 @@ class SinglePlayerGame(PlayerGame):
     def on_close(self):
         """Called when this view is not shown anymore"""
         SaveSinglePlayer(self.controlador, self.player, self.level).save()
-        print("ENCERRADO")
-
