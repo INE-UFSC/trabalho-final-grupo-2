@@ -1,9 +1,11 @@
+from abc import ABC, abstractmethod
+
 import arcade
 from controller import controller
 
 
 
-class PlayerGame(arcade.View):
+class PlayerGame(arcade.View, ABC):
     def __init__(self):
         super().__init__()
 
@@ -116,14 +118,17 @@ class PlayerGame(arcade.View):
         self.portal_list.draw()
         self.damage_list.draw()
 
+    @abstractmethod
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
         pass
 
+    @abstractmethod
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
         pass
 
+    @abstractmethod
     def update(self, level):
         """ Movement and game logic """
         pass
