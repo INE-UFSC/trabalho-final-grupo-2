@@ -34,22 +34,39 @@ class SaveMultiPlayer:
         p2 = Player('assets/blue')
         p1.state().volta_score(dict["Player1_score"])
         p2.state().volta_score(dict["Player2_score"])
-        if "Jump" in dict["Player1_cards"]:
+        if "Jump" in dict["Player1_cards"][0]:
             p1.deck().add_card(JumpCard())
-        if "Silent" in dict["Player1_cards"]:
+        if "Silent" in dict["Player1_cards"][0]:
             p1.deck().add_card(SilentCard())
-        if "Box" in dict["Player1_cards"]:
+        if "Box" in dict["Player1_cards"][0]:
             p1.deck().add_card(BoxCard())
-        if "Save" in dict["Player1_cards"]:
+        if "Save" in dict["Player1_cards"][0]:
             p1.deck().add_card(SaveCard())
 
-        if dict["Player2_cards"][0] == "Jump" or dict["Player2_cards"][1] == "Jump":
+        if "Jump" in dict["Player1_cards"][1]:
+            p1.deck().add_card(JumpCard())
+        if "Silent" in dict["Player1_cards"][1]:
+            p1.deck().add_card(SilentCard())
+        if "Box" in dict["Player1_cards"][1]:
+            p1.deck().add_card(BoxCard())
+        if "Save" in dict["Player1_cards"][1]:
+            p1.deck().add_card(SaveCard())
+
+        if dict["Player2_cards"][0] == "Jump":
             p2.deck().add_card(JumpCard())
-        if dict["Player2_cards"][0] == "Silent" or dict["Player2_cards"][1] == "Silent":
+        if dict["Player2_cards"][0] == "Silent":
             p2.deck().add_card(SilentCard())
-        if dict["Player2_cards"][0]  == "Box" or dict["Player2_cards"][1] == "Box":
+        if dict["Player2_cards"][0]  == "Box":
             p2.deck().add_card(BoxCard())
-        if dict["Player2_cards"][0] == "Save" or dict["Player2_cards"][1] == "Save":
+        if dict["Player2_cards"][0] == "Save":
+            p2.deck().add_card(SaveCard())
+        if  dict["Player2_cards"][1] == "Jump":
+            p2.deck().add_card(JumpCard())
+        if dict["Player2_cards"][1] == "Silent":
+            p2.deck().add_card(SilentCard())
+        if  dict["Player2_cards"][1] == "Box":
+            p2.deck().add_card(BoxCard())
+        if  dict["Player2_cards"][1] == "Save":
             p2.deck().add_card(SaveCard())
 
         start_view = self.controlador.multi_player(p2, p1)
