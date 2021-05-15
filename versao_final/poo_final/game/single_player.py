@@ -13,6 +13,7 @@ class SinglePlayerGame(PlayerGame):
     def setup(self, level, savex=192, savey=192):
         """ Set up the game here. Call this function to restart the game. """
         super().setup(level)
+        self.level = level
 
         self.player.state().isInPortal = False
         self.player.state().isWithKey = False

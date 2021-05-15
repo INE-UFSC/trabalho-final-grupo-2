@@ -17,6 +17,7 @@ class MultiPlayerGame(PlayerGame):
     def setup(self, level, savex1=192, savex2=192, savey1=192, savey2=192):
         """ Set up the game here. Call this function to restart the game. """
         super().setup(level)
+        self.level = level
         self.player_one.state().isInPortal = False
         self.player_one.state().isWithKey = False
         self.player_one.player_sprite.center_x = savex1
@@ -185,7 +186,7 @@ class MultiPlayerGame(PlayerGame):
             if self.player_one.state().isWithKey:
                 self.player_one.state().isInPortal = True
                 self.level += 1
-                if self.level == 4:
+                if self.level == 9:
                     if self.player_two.state().score > self.player_one.state().score:
                         ini_view = self.controlador.finish_view("Azul vence")
                     else:
