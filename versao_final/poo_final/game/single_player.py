@@ -49,12 +49,16 @@ class SinglePlayerGame(PlayerGame):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player.player_sprite.change_x = self.controlador.PLAYER_MOVEMENT_SPEED
         elif key == arcade.key.KEY_1:
+            self.player.state().score = - 5
             self.player.deck().cards()[0].power(self.player)
         elif key == arcade.key.KEY_2:
+            self.player.state().score = - 5
             self.player.deck().cards()[1].power(self.player)
         elif key == arcade.key.KEY_3:
+            self.player.state().score = - 5
             self.player.deck().cards()[2].power(self.player)
         elif key == arcade.key.KEY_4:
+            self.player.state().score = - 5
             self.player.deck().cards()[3].power(self.player)
 
     def on_key_release(self, key, modifiers):

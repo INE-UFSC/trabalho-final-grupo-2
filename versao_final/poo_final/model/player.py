@@ -42,6 +42,9 @@ class PlayerState():
     def score(self, score):
         self.__score += score
 
+    def volta_score(self, score):
+        self.__score = score
+
     @property
     def isWithKey(self):
         return self.__isWithKey

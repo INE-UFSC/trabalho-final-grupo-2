@@ -32,8 +32,8 @@ class SaveMultiPlayer:
     def return_game(self, dict):
         p1 = Player('assets/yellow')
         p2 = Player('assets/blue')
-        p1.state().score = dict["Player1_score"]
-        p2.state().score = dict["Player2_score"]
+        p1.state().volta_score(dict["Player1_score"])
+        p2.state().volta_score(dict["Player2_score"])
         if "Jump" in dict["Player1_cards"]:
             p1.deck().add_card(JumpCard())
         if "Silent" in dict["Player1_cards"]:
@@ -79,7 +79,7 @@ class SaveSinglePlayer:
 
     def return_game(self, dict):
         player = Player(dict["player_front"])
-        player.state().score = dict["Player_score"]
+        player.state().volta_score(dict["Player_score"])
         single = self.controlador.single_player(player)
         single.setup(dict["Nivel"], dict["Player_savex"], dict["Player_savey"])
         return single

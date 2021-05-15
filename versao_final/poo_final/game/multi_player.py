@@ -67,10 +67,10 @@ class MultiPlayerGame(PlayerGame):
         if self.player_one.state().score > 5:
             if key == arcade.key.KEY_1:
                 self.player_one.deck().cards()[0].power(self.player_one)
-                self.player_two.state().score = -5
+                self.player_one.state().score = -5
             elif key == arcade.key.KEY_2:
                 self.player_one.deck().cards()[1].power(self.player_one)
-                self.player_two.state().score = -5
+                self.player_one.state().score = -5
 
         # player two
         if key == arcade.key.UP:
