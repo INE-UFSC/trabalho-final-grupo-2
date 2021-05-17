@@ -47,10 +47,10 @@ class ChoiceView(arcade.View):
         middle_x = self.window.width // 5
 
         self.personagem_list = arcade.SpriteList()
-        b1 = Personagem('assets/button_yellow.jpg', 1)
+        b1 = Personagem('assets/button_yellow.png', 1)
         b1.position = middle_x * 2, y_slot * 1
         self.personagem_list.append(b1)
-        b2 = Personagem('assets/button_blue.jpg', 2)
+        b2 = Personagem('assets/button_blue.png', 2)
         b2.position = middle_x * 3, y_slot * 1
         self.personagem_list.append(b2)
 
